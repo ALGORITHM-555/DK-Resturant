@@ -1,5 +1,5 @@
 <nav class="navbar navbar-dark navbar-theme-primary px-4 col-12 d-lg-none">
-    <a class="navbar-brand me-lg-5" href="../../index.html">
+    <a class="navbar-brand me-lg-5" href="{{url('/')}}">
         <img class="navbar-brand-dark" src="{{url('/img/brand/light.svg')}}" alt="Volt logo" /> <img class="navbar-brand-light" src="{{url('/img/brand/dark.svg')}}" alt="Volt logo" />
     </a>
     <div class="d-flex align-items-center">
@@ -35,11 +35,11 @@
     </div>
     <ul class="nav flex-column pt-3 pt-md-0">
       <li class="nav-item">
-        <a href="../../index.html" class="nav-link d-flex align-items-center">
+        <a href="{{url('/')}}" class="nav-link d-flex align-items-center">
           <span class="sidebar-icon">
             <img src="{{url('/img/brand/light.svg')}}" height="20" width="20" alt="Volt Logo">
           </span>
-          <span class="mt-1 ms-1 sidebar-text">Volt Overview</span>
+          <span class="mt-1 ms-1 sidebar-text">Preview Website</span>
         </a>
       </li>
       <li class="nav-item ">
@@ -51,19 +51,19 @@
         </a>
       </li>
       <li class="nav-item">
-        <a href="https://demo.themesberg.com/volt-pro/pages/kanban.html" target="_blank" class="nav-link d-flex justify-content-between">
+        <a href="{{ route('home.page.settings')}}" class="nav-link d-flex justify-content-between">
           <span>
             <span class="sidebar-icon">
               <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
             </span>
-            <span class="sidebar-text">Kanban</span>
+            <span class="sidebar-text">Home Page</span>
           </span>
-          <span>
+          {{-- <span>
             <span class="badge badge-sm bg-secondary ms-1 text-gray-800">Pro</span>
-          </span>
+          </span> --}}
         </a>
       </li>
-      <li class="nav-item ">
+      {{-- <li class="nav-item ">
         <a href="../../pages/transactions.html" class="nav-link">
           <span class="sidebar-icon">
             <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z"></path><path fill-rule="evenodd" d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" clip-rule="evenodd"></path></svg>
@@ -262,7 +262,7 @@
           </span> 
           <span>Upgrade to Pro</span>
         </a>
-      </li>
+      </li> --}}
     </ul>
   </div>
 </nav>

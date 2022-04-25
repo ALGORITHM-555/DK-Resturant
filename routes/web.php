@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\homePageSettingsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,14 +15,17 @@ use App\Http\Controllers\StudentController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 
 Route::get('/project',function(){
     return view('main-section');
 });
+
+Route::get('/home-page-settings',[homePageSettingsController::class,'index'])->name('home.page.settings');
+Route::get('/settings',[homePageSettingsController::class,'settings'])->name('header_page.settings');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -46,3 +50,22 @@ Route::resource('/students', StudentController::class);
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+//FRONTEND ROUTES
+Route::get('/', function () {
+    return view('front-end.index');
+});
+
+Route::get('/barnala-hub/about-us', function () {
+    return view('front-end.about-us');
+});
+
+Route::get('/barnala-hub/menu', function () {
+    return view('front-end.menu');
+});
+
+Route::get('/barnala-hub/book-table', function () {
+    return view('front-end.book-table');
+});
+

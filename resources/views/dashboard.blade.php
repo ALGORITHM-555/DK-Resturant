@@ -1,5 +1,5 @@
 @push('title')
-    <title>Sign Up</title>
+    <title>Dashboard</title>
 @endpush
 @extends('main')
 @section('main-section')
