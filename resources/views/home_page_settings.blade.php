@@ -3,8 +3,13 @@
 <title>Home Page Settings</title>
 @endpush
 @extends('main')
-@section('main-section')    
+@section('main-section')  
 <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<style>
+  .status_off{
+    background:#f5d3a4 !important;border:#f5d3a4 !important;
+  }
+</style>
 <div class="py-4">
     <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
         <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
@@ -27,15 +32,17 @@
     </div>
 </div>
 <div class="block-container row ">    
+      @foreach($blocks as $block)      
         <div class="card mt-3 mx-2 " style="width: 18rem;" data-aos="zoom-in-up" data-aos-delay="100">
             <img src="{{url('/img/home_blocks/food-1.jpg')}}" class="card-img-top" alt="{{url('/img/home_blocks/food-1.jpg')}}">
             <div class="card-body">
-              <h4 class="card-title">Header Block</h4>              
-              <a href="{{route('header_page.settings')}}" class="btn btn-primary">Settings</a>
-              <a href="#" class="btn btn-secondary ms-3 position-relative" style="background:#f5d3a4 !important;border:#f5d3a4 !important">Show: Off</a>
+              <h4 class="card-title">{{$block->name}}</h4>              
+              <a href="{{route('home.page.settings')}}/{{strtolower(str_replace(' ','-',$block->name))}}" class="btn btn-primary">Settings</a>
+              <a href="#" id="btn_id_{{$block->id}}" class="btn btn-secondary ms-3 position-relative status_btn {{$block->status ? ' ' : 'status_off' }}" data-status="{{$block->status}}" data-id="{{$block->id}}">Show: {{$block->status ? 'On' : 'Off' }}</a>
             </div>
           </div>
-          <div class="card mt-3 mx-2" style="width: 18rem;" data-aos="zoom-in-up" data-aos-delay="200">
+      @endforeach
+          {{-- <div class="card mt-3 mx-2" style="width: 18rem;" data-aos="zoom-in-up" data-aos-delay="200">
             <img src="{{url('/img/home_blocks/food-2.jpg')}}" class="card-img-top" alt="{{url('/img/home_blocks/food-2.jpg')}}">
             <div class="card-body">
               <h4 class="card-title">Banner Block</h4>              
@@ -90,16 +97,53 @@
              <a href="#" class="btn btn-primary">Settings</a>
               <a href="#" class="btn btn-secondary ms-3">Show: On</a>
             </div>
-          </div>
+          </div> --}}
           
     </div>
 </div>
-
 <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 <script>
   AOS.init({
     offset: 0,
     duration: 300, 
   });
+
+  $(document).ready(function(){
+    $('.status_btn').on('click',function(){
+      var block_status = $(this).attr('data-status');
+      var data_id = $(this).attr('data-id');
+      var btn_id = $(this).attr('id');
+      $.ajax({
+        url: '{{ route('update_block.status') }}',
+        method:'post',
+        data:{'data-id':data_id,'block_status':block_status},
+        headers: {
+            'X-CSRF-Token': '{{ csrf_token() }}',
+        },
+        success:function(res){
+          if(res == 'status_update'){            
+            let status = $('#'+btn_id+'').attr('data-status');
+           if(status == true){             
+            $('#'+btn_id+'').text('Show:Off'); 
+            $('#'+btn_id+'').addClass('status_off');
+            $('#'+btn_id+'').attr('data-status','0');            
+           }else{
+            $('#'+btn_id+'').text('Show: On'); 
+              $('#'+btn_id+'').removeClass('status_off');
+              $('#'+btn_id+'').attr('data-status','1');
+              
+           }
+           new Notify ({
+                  title: 'Status Update',
+                  text: 'Block Status Update Successfully',
+                  autoclose: true,
+                  autotimeout: 3000,
+                  status: 'success'
+              })
+          }
+        }
+      });
+    })
+  })
 </script>
 @endsection

@@ -360,7 +360,8 @@ a:focus {
     font-size: 14px;
 }
 
-.slider_section .detail-box a {
+.slider_section .detail-box a,
+.view-more {
     display: inline-block;
     padding: 10px 45px;
     background-color: #ffbe33;
